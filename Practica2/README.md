@@ -1,6 +1,6 @@
 # Práctica 2: Búsqueda heurística sin adversa-rios
 
-El propósito de esta práctica es que el alumno reutilice código que implementa el algoritmo A*. Se bajará código de Github, y lo utilizará para ejecutareste algoritmo para un grafo concreto.
+El propósito de esta práctica es que el alumno reutilice código que implementa el algoritmo A*. Se bajará código de Github, y lo utilizará para ejecutar este algoritmo para un grafo concreto.
 
 ## Problema a resolver: Algoritmo A*
 
@@ -201,6 +201,7 @@ Su implementación dentro del código:
 final List<Graph.Vertex<T>> openSet = new ArrayList<Graph.Vertex<T>>(size); // The set of tentative nodes to be evaluated, initially containing the start node
 openSet.add(start);
 ```
+La lista ABIERTA inicialmente contiene el nodo inicial y los nodos provisionales a evaluar.
 
 ### 2.- ¿Qué variable representa la función g?
 
@@ -212,6 +213,7 @@ Su implementación dentro del código:
 final Map<Graph.Vertex<T>,Integer> gScore = new HashMap<Graph.Vertex<T>,Integer>(); // Cost from start along best known path.
 gScore.put(start, 0);
 ```
+La función g, es el coste del mejor camino desde el nodo inicial a N obtenido hasta el momento durante la búsqueda.
 
 ### 3.- ¿Qué variable representa la función f?
 
@@ -225,6 +227,8 @@ for (Graph.Vertex<T> v : graph.getVertices())
     fScore.put(v, Integer.MAX_VALUE);
 fScore.put(start, heuristicCostEstimate(start,goal));
 ```
+
+La funcióin f representa el coste del camino más corto, desde el inicio hasta los objetivos condicionado a pasar por el nudo N.
 
 ### 4.- ¿Qué método habría que modificar para que la heurística representarala distancia aérea entre vértices?
 
@@ -240,7 +244,7 @@ protected int heuristicCostEstimate(Graph.Vertex<T> start, Graph.Vertex<T> goal)
 }
 ```
 
-Actualmente en la implementación de aStar se utiliza para inicializar los valores de la función f.
+Actualmente en la implementación de aStar se utiliza para inicializar los valores de la función f y retorna un 1.
 
 ``` java
 fScore.put(start, heuristicCostEstimate(start,goal));
@@ -273,3 +277,38 @@ private List<Graph.Edge<T>> reconstructPath(Map<Graph.Vertex<T>,Graph.Vertex<T>>
         return totalPath;
     }
 ```
+
+**_reconstructPath_**, retorna el camino que se recorre. Sin embargo, las evaluaciones se hacen dentro del propio método **_aStar_**, como se puede observar en:
+
+``` java
+         while (!openSet.isEmpty()) {
+            final Graph.Vertex<T> current = openSet.get(0);
+            if (current.equals(goal))
+                return reconstructPath(cameFrom, goal);
+
+            openSet.remove(0);
+            closedSet.add(current);
+            for (Graph.Edge<T> edge : current.getEdges()) {
+                final Graph.Vertex<T> neighbor = edge.getToVertex();
+                if (closedSet.contains(neighbor))
+                    continue; // Ignore the neighbor which is already evaluated.
+
+                final int tenativeGScore = gScore.get(current) + distanceBetween(current,neighbor); // length of this path.
+                if (!openSet.contains(neighbor))
+                    openSet.add(neighbor); // Discover a new node
+                else if (tenativeGScore >= gScore.get(neighbor))
+                    continue;
+
+                // This path is the best until now. Record it!
+                cameFrom.put(neighbor, current);
+                gScore.put(neighbor, tenativeGScore);
+                final int estimatedFScore = gScore.get(neighbor) + heuristicCostEstimate(neighbor, goal);
+                fScore.put(neighbor, estimatedFScore);
+
+                // fScore has changed, re-sort the list
+                Collections.sort(openSet,comparator);
+            }
+        }
+```
+
+Con las variables **_tenativeGScore_** o **_estimatedFScore_**.
