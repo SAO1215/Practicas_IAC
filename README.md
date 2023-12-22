@@ -14,4 +14,4 @@ otra sobre búsqueda heurística
 
 y otra sobre aprendizaje automático.
 
-> Proximamente
+> 📁 Practica 3
