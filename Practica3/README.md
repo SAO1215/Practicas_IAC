@@ -12,7 +12,7 @@ Este proyecto utiliza varios modelos de machine learning para predecir el riesgo
 
 ## Fuente de datos
 
-El data set utilizado en esta entrega es *[Hipertension Arterial Mexico Data Set](https://www.kaggle.com/datasets/frederickfelix/hipertensin-arterial-mxico)*, que fue creado utilizando tres conjuntos de datos provenientes de la página de gobierno llamada Encuesta Nacional de Salud y Nutricion (ENSANUT).
+El data set utilizado en esta entrega es [Hipertension Arterial Mexico Data Set](https://www.kaggle.com/datasets/frederickfelix/hipertensin-arterial-mxico), que fue creado utilizando tres conjuntos de datos provenientes de la página de gobierno llamada Encuesta Nacional de Salud y Nutricion (ENSANUT).
 
 Contiene los siguientes atributos, son las características relevantes de los hechos, que nos van a permitir predecir un resultado:
 
@@ -58,7 +58,7 @@ Para esta practica, la variable a predecir (y) es el riesgo de hipertensión. La
 
 ### Implementación
 
-Al ejecutar el código se lleva a cabo el entrenamiento de los modelos y posteriormente se utiliza con los datos de prueba, se muestra el puntaje de precisión calculado con la misma librería de scikit-learn de cada uno de los modelos.
+Al ejecutar el código se lleva a cabo el entrenamiento de los modelos y posteriormente se utiliza con los datos de prueba, se muestra el puntaje de precisión calculado con la misma librería de scikit-learn de cada uno de los modelos. Ademas por cada modelo se muestra una matriz de confusión que nos permite visualizar el desempeño de los modelos.
 
 #### Modelos Implementados
 
@@ -82,6 +82,8 @@ Y para correr el programa de Python:
 ```bash
 python Practica3.py
 ```
+
+EJEMPLO DE EJECUCIÓN EN: [Practica3.ipynb](https://github.com/SAO1215/Practicas_IAC/blob/main/Practica3/Practica3.ipynb)
 
 #### Requisitos
 
