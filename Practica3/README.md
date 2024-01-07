@@ -85,11 +85,11 @@ Y utilizamos el escalador sklearn.preprocessing.MinMaxScaler para transformar la
 
 El modelo de Gradient Boosting es el que obtiene el mayor puntaje de precisión con 0.9954198473282443, esta medida representa la proporción de predicciones correctas con respecto al total de predicciones realizadas por el modelo.
 
-![resultados](/result_images/Resultados.png)
+![resultados](result_images/Resultados.png)
 
 Tambien podemos verlo representado en la matriz de confusión, esta herramienta grafica nos permite mostrar la comparación entre las predicciones del modelo y las clases reales del conjunto de datos.
 
-![matrizGB](/result_images/test_results_sample.png)
+![matrizGB](result_images/test_results_sample.png)
 
 ### Gradient Boosting Classifier
 
